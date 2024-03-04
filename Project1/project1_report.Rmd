@@ -1,0 +1,31 @@
+---
+title: "Creating images with R"
+author: "HL" #I don't want my name on my github, digital footprint
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=FALSE, error=FALSE)
+```
+
+```{css}
+
+```
+
+## Project requirements
+
+## My meme
+
+```{r meme-code, eval=TRUE}
+
+
+```
+
+```{r animation-code, eval=FALSE}
+
+
+```
+
+## Creativity
+
+## Learning reflection
