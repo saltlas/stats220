@@ -1,6 +1,7 @@
 ---
 title: "Creating images with R"
-author: "HL" #I don't want my name on my github, digital footprint
+subtitle: "with a little bit of magick"
+author: "HL (I don't want my full name on my github, digital footprint)"
 output: html_document
 ---
 
@@ -9,23 +10,293 @@ knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=FALSE, error=FALSE)
 ```
 
 ```{css}
+body {
+    font-size: 12pt;
+    font-family: Monospace;
+    background-color: #f0dacc;
+    border-style: solid;
+    margin: 10px;
+
+}
+
+h1, h2, h3 {
+  font-family: Impact;
+  text-align: center;
+}
+
+h4 {
+  font-size: 10pt;
+}
 
 ```
-
+<hr>
 ## Project requirements
 
+I already have an existing GitHub account and have created a repo for all STATS 220 coursework [here](https://github.com/saltlas/stats220). I have a README.md for the root directory, it's not particularly creative as I don't really want anything silly to be put up on my public github, but I did include a funny cat site at the end. It does check all the boxes, though. The creativity mostly comes later with my meme.
+
+I've chosen not to set up GitHub Pages as it's optional and I'm already familiar with GitHub, so I won't be including a link to the website.
+
+
+I've created the project folder on my computer as shown:
+![](https://cdn.discordapp.com/attachments/896269789142601728/1214400038562701383/image.png?ex=65f8f92b&is=65e6842b&hm=a2890a7fc0a2ebd4ef41751688fe22be45714679cc2287dd55830150a0e99a07&)
+<hr>
 ## My meme
 
-```{r meme-code, eval=TRUE}
+Here is the inspo meme: 
+![](https://cdn.discordapp.com/attachments/896269789142601728/1214402581523079259/inspo_meme.png?ex=65f8fb89&is=65e68689&hm=4877cf02a2b0a47c0552263d2e9c1a20cbf2ae6c1c5a75da48e15a70ed6a03eb&)
 
+I decided to try to create a similar meme from scratch. It ended up being pretty long:
+```{r meme-code, eval=TRUE}
+library(magick)
+
+# top section of meme including text and bullet points
+top_section <- image_blank(width = 500, 
+                           height = 400, 
+                           color = "#DEF1F7") %>%
+  image_annotate(text = "STOP DOING R",
+                 color = "#000000",
+                 size = 50,
+                 font = "Segoe UI",
+                 gravity = "north",
+                 weight = "700") %>%
+  
+  image_annotate(text = "• IMAGES WERE NOT SUPPOSED TO BE EASY TO GENERATE\n",
+                 location = "+40+70",
+                 color = "#000000",
+                 size = 15,
+                 font = "Segoe UI",
+                 gravity = "northwest",
+                 weight = "400") %>%
+  
+  image_annotate(text = "• YEARS OF GRAPHICS TECH yet NO REAL-WORLD USE FOUND for\ndoing better than MS PAINT\n",
+                 location = "+40+110",
+                 color = "#000000",
+                 size = 15,
+                 font = "Segoe UI",
+                 gravity = "northwest",
+                 weight = "400") %>%
+  
+  image_annotate(text = "• Wanted to go higher anyway for a laugh? We had a tool for\nthat: It was called \"USING MS OFFICE PRODUCTS AND \nBURSTING INTO TEARS\"\n",
+                 location = "+40+170",
+                 color = "#000000",
+                 size = 15,
+                 font = "Segoe UI",
+                 gravity = "northwest",
+                 weight = "400") %>%
+  
+  image_annotate(text = "• \"Yes please give me %>% of something. Please start counting\nyour list indices from ONE.\" - Statements dreamed up by the\nutterly Deranged",
+                 location = "+40+250",
+                 color = "#000000",
+                 size = 15,
+                 font = "Segoe UI",
+                 gravity = "northwest",
+                 weight = "400") %>%
+  
+  image_annotate(text = "LOOK at what Statisticians have been demanding your Respect for\nall this time, with all the Python & Google Sheets we built for them",
+                 location = "+20+330",
+                 color = "#000000",
+                 size = 15,
+                 font = "Segoe UI",
+                 gravity = "northwest",
+                 weight = "400") %>% 
+  
+  image_annotate(text = "(This is REAL R done by REAL R Programmers)",
+                 location = "+0+380",
+                 color = "#000000",
+                 size = 15,
+                 font = "Segoe UI",
+                 gravity = "north",
+                 weight = "700") 
+
+
+
+# mid section of meme uses 3 images, which i then append to create the mid section of the meme to be stacked later
+mid1 <- image_read("https://pbs.twimg.com/media/GHzYqFNXwAA2fTS?format=jpg&name=4096x4096") %>%
+  image_scale("x4096") %>%
+  image_crop("0x1000+0+0") %>%
+  image_scale("170x150!") %>%
+  image_border("#DEF1F7", "15x20") %>%
+  image_annotate(text = "???????????",
+                 color = "#FE4748",
+                 size = 15,
+                 font = "Segoe UI",
+                 gravity = "south",
+                 weight = "700") 
+
+mid2 <- image_read("https://www.shutterstock.com/shutterstock/photos/1030308751/display_1500/stock-photo-r-keyboard-key-button-press-type-close-up-macro-desktop-laptop-computer-black-silver-detail-1030308751.jpg") %>%
+  image_scale("150x150!") %>%
+  image_border("#DEF1F7", "25x20") %>%
+  image_annotate(text = "????????",
+                 color = "#FE4748",
+                 size = 15,
+                 font = "Segoe UI",
+                 gravity = "south",
+                 weight = "700") 
+
+mid3 <- image_read("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Normal_distribution_50%25_CI_illustration.svg/1200px-Normal_distribution_50%25_CI_illustration.svg.png") %>%
+  image_scale("150x150!") %>%
+  image_border("#DEF1F7", "25x20") %>%
+  image_annotate(text = "????",
+                 color = "#FE4748",
+                 size = 15,
+                 font = "Segoe UI",
+                 gravity = "south",
+                 weight = "700") 
+
+mid_section <- image_append(c(mid3, mid2, mid1)) %>%
+  image_scale(500)
+
+
+# bottom section involves some more text and an image in the middle
+
+apples_img <- image_read("https://cdn.discordapp.com/attachments/896269789142601728/1214098864064172053/image.png?ex=65f7e0ae&is=65e56bae&hm=90f9aa8eac3417bd5e375f53fe656c79b86ef61a9e7ed4bf4059cf7361103e1b&") %>%
+  image_scale("190x20!")
+
+bottom_section <- image_blank(width = 500, 
+                              height = 50, 
+                              color = "#DEF1F7") %>%
+  image_annotate(text = "\"Hello I would like",
+                 location = "+10",
+                 color = "#000000",
+                 size = 20,
+                 font = "Segoe UI",
+                 gravity = "northwest",
+                 weight = "400") %>%
+  image_annotate(text = "apples please\"",
+                 location="+10",
+                 color = "#000000",
+                 size = 20,
+                 font = "Segoe UI",
+                 gravity = "northeast",
+                 weight = "400") %>%
+  image_annotate(text = "They have played us for absolute fools",
+                 color = "#000000",
+                 size = 15,
+                 font = "Segoe UI",
+                 gravity = "south",
+                 weight = "700") %>%
+  image_composite(apples_img,
+                  offset = "+170+5")
+
+# stacking all three sections on top of each other
+final_meme <- image_append(c(top_section, mid_section, bottom_section), stack = TRUE)
+image_write(final_meme, "my_meme.png")
+final_meme
 
 ```
 
+Here is the animation code, but note that it only works under the assumption that the meme code has been run as it uses the meme as a base.
 ```{r animation-code, eval=FALSE}
 
+# animation part, i'm giving it legs and arms (idk)
+leg <- image_read("https://em-content.zobj.net/source/emojione/211/leg_1f9b5.png") %>%
+  image_scale(90)
+
+arm <- image_read("https://www.clker.com/cliparts/B/S/n/E/q/F/frog-green-right-arm-hi.png") %>%
+  image_scale(80)
+
+# generating different orientations for the arms for diff frames
+arm1 <- arm
+arm2 <- image_rotate(arm, 10) %>%
+  image_transparent("white")
+arm3 <- image_rotate(arm, 20) %>%
+  image_transparent("white")
+arm4 <- image_rotate(arm, -10) %>%
+  image_transparent("white")
+arm5 <- image_rotate(arm, -20) %>%
+  image_transparent("white")
+
+arms <- c(arm1, arm2, arm3, arm2, arm1, arm4, arm5, arm4)
+arm_gif <- image_animate(arms)
+
+# same thing for legs
+leg1 <- leg
+leg2 <- image_rotate(leg, 10) %>%
+  image_transparent("white")
+leg3 <- image_rotate(leg, 20) %>%
+  image_transparent("white")
+leg4 <- image_rotate(leg, -10) %>%
+  image_transparent("white")
+leg5 <- image_rotate(leg, -20) %>%
+  image_transparent("white")
+
+legs <- c(leg1, leg2, leg3, leg2, leg1, leg4, leg5, leg4)
+leg_gif <- image_animate(legs)
+
+# copy of the meme with a border for space for the limbs
+blank <- image_border(final_meme, "white", "70x70") 
+
+# placeholder initialization for the vector of frames
+frames
+
+for (frame in 1:8){
+  # generating the gifs individually and then composite-ing them together gave me 4096 frames so we're doing it this way
+  current_frame <- image_composite(anim, legs[frame], offset="+0+650") %>%
+    image_composite(image_flop(legs[frame]), offset="+550+650") %>%
+    image_composite(image_flop(arms[frame]), offset="+0+100") %>%
+    image_composite(arms[frame], offset="+550+100")
+  frames <- c(frames, current_frame)
+}
+
+final_gif <- image_animate(frames)
+image_write(final_gif, "my_animation.gif")
 
 ```
-
+Here is the gif it generates:
+![](https://cdn.discordapp.com/attachments/707439507657719868/1214420342655684698/my_animation.gif?ex=65f90c14&is=65e69714&hm=0d6c7b7662ffed2b495c9a04b4b8b91c73c0ee660204be05626b52a33c8d948a&)
+<hr>
 ## Creativity
 
+I demonstrated creativity in this project chiefly by using functions from the magick library that were not taught, as well as using the ones that were taught in creative ways.
+
+Functions that I used that were not taught:
+
+- image_composite
+
+#### I used this for the gif frame creation and for the bottom section of the meme.
+
+
+- image_border
+
+#### I used this for the mid section of the meme and the gif creation.
+
+
+- image_rotate
+
+#### I used this for gif frame creation by rotating the limbs.
+
+
+- image_flop
+
+#### I used this in gif frame creation to mirror the limbs so that I only needed one arm image and one leg image.
+
+
+- image_transparent
+
+#### I used this in gif frame creation because while the images I used were transparent, rotating them for some reason generated a white background.
+
+Functions that I used in new or interesting ways:
+
+- image_append
+
+#### For the mid section, I combined 3 images horizontally and then for the final meme I stacked the three sections vertically.
+
+- image_annotate
+
+#### I used arguments not covered in class, such as font weight and location
+
+Bonus:
+
+- Used a for loop
+
+
+<hr>
 ## Learning reflection
+
+I learnt that code readability really makes a difference to the feel of a programming language. R errors are far more readable, and the language is easier to use and understand than languages like Java.
+
+I thought that creating an image from scratch using code would be harder based off of my experiences with CSS, but image generation straight out of the box the way this project has taught is really cool! I can see how it would make generating plots of data super easy and fun.
+
+I also really enjoyed learning about the c() and paste() functions in R as they are somewhat novel to me and seem very useful, especially for handling large amounts of data in easy and readable ways. Matching vectors to each other, especially in repeating patterns the way paste() does so is an incredibly useful concept and can save a lot of time.
+
+I'm interested in learning more about how R differs from other programming languages, especially with regard to how it suits statistics more and its unique functions (like paste()" to aid statisticians. I'm also excited to see how what we've learnt so far can translate into data processing rather than meme generation, as I can already see some ways it would be great for such a task.

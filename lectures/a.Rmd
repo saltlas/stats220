@@ -1,0 +1,42 @@
+
+
+# Fun with R, markdown, and CSS
+
+```{r setup, include=FALSE}
+# For this online Rmd editor, the packages don't need to be loaded
+# Put when working in RStudio, you would load your packages here
+library(magick)
+```
+
+
+## Some starter CSS
+
+You don't have to change the style of the `pre` HTML element (and if you do, don't change it to make it hard to read the code!)
+
+```{css}
+body {
+    font-size: 12pt;
+    font-family: Comic Sans MS;
+}
+
+pre {
+    background-color: #ADD8E6;
+    padding: 5px;
+}
+```
+
+
+## Random cat!
+
+
+```{r}
+```
+
+## Add an animated GIF using a URL from the web and markdown
+
+
+
+
+
+
+
