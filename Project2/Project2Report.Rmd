@@ -1,0 +1,87 @@
+---
+title: "Project 2"
+author: "Hadas Livne"
+date: "`r Sys.Date()`"
+subtitle: "STATS 220 Semester One 2024"
+output:
+  html_document:
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=FALSE, error=FALSE)
+library(tidyverse)
+```
+## Introduction
+
+I focused on human behaviours around reading for this project. Namely, how much respondents read this week, what sorts of things they read and in what format they read it in, as well as surrounding information. I followed guideline 1 for designing forms: communicate your purpose. I did this through my form description, which clearly communicates the purpose of the survey, where the data is going, and other prudent information surrounding the form. I also followed guideline 4 of designing forms, by using response validation for things such as ensuring that hours per week cannot go below 0 or above the number of hours in a week, 168. I also used response validation to ensure the number of days given could not be below 0 or above 7.
+
+The data collected from my form would allow me to analyse changes in reading behaviours over different weeks by showing me the changes in how much time people spend reading per week - with questions such as "How many hours did you spend reading this week?" and "During how many days this week did you read?", the numerical data would be in a convenient form for analysis. Additionally, I could analyse changes in the types of reading people did week-to-week. If I were surveying mainly students, for example, I would expect the number of people reading textbooks each week to change throughout the semester.
+
+Link to form: https://forms.gle/9U3R5WJVWHdBNAPX9
+
+
+## Analytics
+
+### Static statements
+- Most of the people who completed my form did read in the week in which they completed the form in.
+
+- The genres of fiction people who completed my form most liked were Science Fiction and Fantasy.
+
+- The majority of the people who completed my form got some or all of their reading materials that week for free in some capacity, rather than buying or paying for them.
+
+### Code
+
+```{r analytics, fig.width = 13}
+
+learning_data <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vT8Q1JuHaVX5cWvAAOEddu_xgOZmYJAimbvCJsu1neE_sryJRuU2dT5COnWkrV2CKpOMEymb8gWa0zS/pub?gid=400502560&single=true&output=csv")
+
+learning_data <- rename(learning_data, enjoy_reading = 2, read_this_wk = 3,
+                        media = 4, hrs_this_wk = 5, days_this_wk = 6, acquisition = 7,
+                        format = 8, genre = 9)
+
+
+
+learning_data_no_na <- na.omit(learning_data)
+
+paste("The respondent who read for the most amount of hours this week read for",
+      max(learning_data_no_na$hrs_this_wk), "hour(s).",
+      "The respondent who read for the least amount of hours this week read for",
+      min(learning_data_no_na$hrs_this_wk), "hour(s).", collapse = " ")
+
+
+ggplot(data = learning_data_no_na) +
+  geom_bar(aes(x = genre, color=genre)) + theme(legend.position = "none") +
+scale_x_discrete(guide = guide_axis(n.dodge=3)) + labs(x="Favourite Fiction Genre", y="Count", title="Respondents' favourite genre of fiction")
+
+ggplot(data = separate_rows(learning_data_no_na, media, sep=", ")) +
+  geom_bar(aes(x = media, color=media)) + theme(legend.position = "none") +
+scale_x_discrete(guide = guide_axis(n.dodge=3)) + labs(x="Media Type", y="Count", title="Type of media respondents read in week of response")
+
+```
+
+
+## Creativity
+
+I used the Google Forms section feature to only collect the majority of the data from respondents who have read this week. Respondents who selected "no" for the question "Did you read this week?" were sent to the end of the form and thanked for their time. This ensured that I did not ask questions about their reading behavior this week when they hadn't done any.
+
+I also demonstrated creativity by asking a "scale"-type question at the beginning - "How much do you enjoy reading?". This was not on the list of types of questions required to ask and gave me a type of data that I could use to generate an interesting sort of plot:
+
+```{r creativity}
+
+ggplot(data=learning_data) + geom_bar(aes(fill=read_this_wk, x=enjoy_reading)) + labs(fill = "Read this week", x = "Enjoys reading", y="Count", title="How much respondents enjoyed reading", subtitle="on a scale of 1 to 5")
+
+
+```
+
+Which can begin to give some insight on whether people's enjoyment of reading is correlated to whether they read week-to-week. A scatter plot is likely to be better for representing this information, however.
+
+Furthermore, the plot above demonstrates ggplot methods not covered in labs, and I also had to implement some in the analytics section to resolve my long labels crashing into each other or going out of the plot.
+
+## Learning reflection
+
+
+I learnt a lot about form design, doing it in practice made me realise where I could improve for next time - for example, specifying more clearly what "the past week" means - does it mean starting from Monday or Sunday, or the same weekday it is now but 7 days ago? I imagine large-scale research form design really has to be well-thought out before its release, as I also encountered people asking about forms of media I hadn't considered, and other small issues with my form.
+
+I also learnt that generating plots in R was easier than I expected it to be, and that there are many different ways you can visualise data - some more confusing than others. I am curious about how to visualise things such as scatter plots or line plots in R.
+

@@ -1,0 +1,56 @@
+---
+title: "project5_report.rmd"
+author: "Hadas Livne"
+subtitle: "Creating data from digital sources"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=FALSE, error=FALSE)
+```
+
+## Part A
+
+
+I explored data relating to the popularity and progression of the media format of online interactive stories. I used Sufficient Velocity, a "quest" forum site that is popular for this format, for this purpose. I selected this data context because I am very interested in the ways in which free, self-published online literature develops, as I think it gives real insight into human nature and community surrounding producing art - specifically writing - for the fun of it and it is often dismissed in research contexts because it's of non-publisher quality or less high brow than published literature.
+
+
+```{r file='partA.R'}
+
+```
+
+## Part B
+
+```{r file='partB.R', results='hide'}
+
+```
+
+
+The average number of words per paragraph in releases for Paul Goldsmith was `r average_words_per_paragraph` words.
+
+The average number of paragraphs per release was `r avg_paragraphs` paragraphs.
+
+The average word length was `r avg_word_length` characters.
+
+The release with the most words had `r max_words` words.
+
+
+
+## Part C
+
+```{r file='partC.R'}
+
+```
+
+My visualisation reveals that generally, housing is mentioned less than the other two, education is mentioned the most, all of their trends seem to have the same rough shape and all of them have been being mentioned less and less since 2010.
+
+## Learning reflection
+
+I learnt how to be able to tell whether a website allows web scraping, which I think is super important because I had no idea that most websites have their own robots.txt file and it's useful knowledge. It also gives insight into how various sites are responding to ChatGPT, as most of the robots.txt files I found had ChatGPT explicitly blocked. Web scraping is an extremely useful tool as well, that I had no idea how to do, and this gives me insight into how data is collected for analysis off of the web without having access to the websites' databases directly. I am curious about exploring further what uses web scraping will have to my own life, and how people combat it when people ignore their robots.txt and ToS.
+
+## Self review
+
+I think the amount of practice with RMarkdown and its versatility has been extremely useful for me, as I had no idea there was such a versatile tool for combining R code, markdown and HTML/CSS built in anywhere - the results it produces so easily seem like they should take a lot more work than they do. This relates to the course learning outcome: "Develop communication skills, including using reproducible reporting with R Markdown", which I think having to produce a report for each project has definitely developed for me. In addition, another communication skill this course has taught me has been how best to summarise and display data, which is definitely not something I was gifted at before, and I've been given a lot of direction and practice in what considerations there are when communicating data that I did not previously have.

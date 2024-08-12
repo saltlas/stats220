@@ -1,0 +1,69 @@
+---
+title: "Project 4"
+author: "Hadas Livne"
+date: "`r Sys.Date()`"
+subtitle: Visualising data about videos from the YouTube channels Vihart and Miracle Forest
+output: html_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=FALSE, error=FALSE)
+```
+
+```{css echo=FALSE}
+body {
+  background-color: #ffffd4;
+  
+}
+h1 {
+  color: #993404;
+}
+img {
+  border: 2pt solid;
+  border-color: #993404;
+
+}
+p {
+  background-color: #fed98e;
+  border-radius: 8px;
+  padding: 5px;
+}
+```
+
+
+# Introduction
+
+I chose the YouTube channels Vihart and Miracle Forest for this project. I chose them because they're very different and because I'm quite familiar with both of them, so I would be able to better gain insight from the data I analysed. Their differences in almost all purposes seemed like a good way to draw interesting statistical comparisons, but it did end up making visualising data tricky.
+
+Before I accessed the data, I thought about comparing the length of the videos (as Miracle Forest's are quite long) and the upload rate (As ViHart is more sporadic and has tapers off in recent years).
+
+I decided to focus on word usage in titles, upload rate, and mean video duration. 
+
+Word usage in titles gave me a good opportunity to use string manipulation functions, but presented some challenges in deciding how to present the data and how many words to show. I decided to use horizontal columns as they were a popular way of displaying a similar chart and were simple to use. I tried to find a way to display all of the words down to ones that were used only once, including attempts to use ggplotly to produce a dynamic graph, but ultimately decided on a cutoff point. Finding ways to separate the two channels' words and still sort by total word usage was also challenging.
+
+Upload rate presented a challenge in terms of separating the uploads by month and still having an X axis that scaled linearly instead of only showing months where uploads actually occurred. I tried a histogram, a bar plot, a line plot, and eventually settled on a geom_point for easily readable data with some trend lines added for showing statistical trends. I tried many things in terms of separating the months, including forcing NA values to remain, which unfortunately ended up showing the months with NAs as having had 1 upload. I believe we cover better ways to do this than I did it in class soon. Oh well.
+
+Mean video duration gave me an opportunity to make a comparitively simpler graph than the first two and to use the summarise function as intended. I chose a bar chart for its simplicity.
+
+# Dynamic data story
+
+![](data_story.gif)
+
+Aside from the fact I added two additional plots, I also experimented with a new way of showing the word frequency plot (plot 1) such that all of the words would be displayed. It's also a gif, but I figured adding it to the data story itself would make it really annoying to mark. The code for generating it is in visualisations.R. Here it is:
+
+![](my_animation.gif)
+
+# Learning reflection
+
+I learnt that it's definitely way harder to visualise disparate and large ranges of data in ways that are easy for people to view and understand. There's a lot of information to display in what is ultimately only a few images. This made me really appreciate the importance of tools and methods to visualise data easily, cleanly and accurately, such as ggplot. After all of that fiddling arounnd with the months in the upload rate plot, I'm definitely interested in good and efficient ways of visualising dates and times and such in our upcoming modules. I made sure to only use libraries we were taught so far, so I wonder whether we will be using additional libraries for that purpose.
+
+# Appendix
+
+```{r file='visualisations.R', eval=FALSE, echo=TRUE}
+
+```
+
+```{r file='data_story.R', eval=FALSE, echo=TRUE}
+
+```
+
+
